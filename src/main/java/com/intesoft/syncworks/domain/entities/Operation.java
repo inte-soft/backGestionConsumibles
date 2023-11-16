@@ -6,10 +6,10 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 @Entity(name = "operacion")
-public class Operacion {
+public class Operation {
     private int id;
-    private String nombre;
+    private String name;
     @ManyToMany(fetch = FetchType.EAGER)
     @Column(name = "idRol")
-    private Modulo modulo;
+    private Module module;
 }

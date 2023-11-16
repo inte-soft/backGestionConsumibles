@@ -13,9 +13,9 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "nombre")
-    private String nombre;
+    private String name;
     @Column(name = "apellido")
-    private String apellido;
+    private String lastName;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "rolId", referencedColumnName = "id")
     private Rol rol;

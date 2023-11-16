@@ -3,7 +3,7 @@ package com.intesoft.syncworks.domain.entities;
 import javax.persistence.Entity;
 
 @Entity(name = "modulo")
-public class Modulo {
+public class Module {
     private int id;
-    private String nombre;
+    private String name;
 }
