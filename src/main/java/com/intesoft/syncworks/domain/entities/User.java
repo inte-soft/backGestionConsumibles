@@ -12,13 +12,16 @@ public class User {
     private String user;
     @Column(name = "password")
     private String password;
-    @Column(name = "nombre")
+    @Column(name = "name")
     private String name;
-    @Column(name = "apellido")
+    @Column(name = "lastName")
     private String lastName;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "rolId", referencedColumnName = "id")
     private Rol rol;
+    @OneToOne(fetch = FetchType.EAGER)
+    @Column(name = "idArea")
+    private Area area;
 
 
 }

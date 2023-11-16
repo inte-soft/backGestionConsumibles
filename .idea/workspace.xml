@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23c1421d-62ad-45bf-8214-cb5f2ed82a3a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Modulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Operacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Operation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/RolOperacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/RolOperation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
