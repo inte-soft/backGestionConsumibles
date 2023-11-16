@@ -2,22 +2,22 @@ package com.intesoft.syncworks.domain.entities;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "USER")
+    @Column(name = "user")
     private String user;
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
-    @Column(name = "NOMBRE")
+    @Column(name = "nombre")
     private String nombre;
-    @Column(name = "APELLIDO")
+    @Column(name = "apellido")
     private String apellido;
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ROL_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "rolId", referencedColumnName = "id")
     private Rol rol;
 
 
