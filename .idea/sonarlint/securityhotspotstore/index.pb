@@ -5,3 +5,17 @@ m
 =src/main/java/com/intesoft/syncworks/domain/entities/Rol.java,0\7\074ccd749a9cdb57e87a2e52b78ae2b581211cc0
 n
 >src/main/java/com/intesoft/syncworks/domain/entities/User.java,7\9\797bb060200ad06f32e87d2c13c847757be2397e
+v
+Fsrc/main/java/com/intesoft/syncworks/domain/entities/RolOperation.java,5\e\5e992b50b0743bc58a8364a33deaa82f78a5c751
+p
+@src/main/java/com/intesoft/syncworks/domain/entities/Module.java,a\c\aca501641716826eb5d230c579e14976e820d1db
+s
+Csrc/main/java/com/intesoft/syncworks/domain/entities/Operation.java,6\e\6e906c3844fbc4933b3848f22020ea58043e1a35
+n
+>src/main/java/com/intesoft/syncworks/domain/entities/Area.java,c\c\cc94e3ecf6c152f0daa1558f7b457c2270610ea7
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+t
+Dsrc/main/java/com/intesoft/syncworks/interfaces/dto/ResponseDto.java,5\4\544574488cea01dc455c15eaf9c35e49c8f031f4
+v
+Fsrc/main/java/com/intesoft/syncworks/domain/services/LoginUseCase.java,2\b\2bb3a5eb3e0f20e548822772cf28248382e7e59e

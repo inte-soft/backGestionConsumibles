@@ -1,16 +1,16 @@
 package com.intesoft.syncworks.domain.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity(name = "rolOperation")
 public class RolOperation {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     private Rol rol;
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "operation_id")
     private Operation operation;
 
 }

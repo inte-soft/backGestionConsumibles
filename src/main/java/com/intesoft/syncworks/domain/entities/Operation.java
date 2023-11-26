@@ -1,15 +1,14 @@
 package com.intesoft.syncworks.domain.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.*;
 
-@Entity(name = "operacion")
+@Entity
 public class Operation {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Column(name = "idRol")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idModule")
     private Module module;
 }

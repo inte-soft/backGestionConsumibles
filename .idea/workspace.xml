@@ -5,9 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23c1421d-62ad-45bf-8214-cb5f2ed82a3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/JpaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/repositories/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/ResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/7/074ccd749a9cdb57e87a2e52b78ae2b581211cc0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/7/074ccd749a9cdb57e87a2e52b78ae2b581211cc0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/9/797bb060200ad06f32e87d2c13c847757be2397e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/9/797bb060200ad06f32e87d2c13c847757be2397e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/SyncworksApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/SyncworksApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/RolOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/RolOperation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/intesoft/syncworks/SyncworksApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/intesoft/syncworks/SyncworksApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +70,43 @@
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\domain\" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\domain" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn compile" />
+      <command value="mvn install:install" />
+      <command value="mvn install" />
+      <command value="mvn clean" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.SyncworksApplication">
+    <configuration name="SyncworksApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.intesoft.syncworks.SyncworksApplication" />
+      <module name="syncworks" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intesoft.syncworks.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in syncworks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="syncworks" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SyncworksApplication" />
+        <item itemvalue="JUnit.All in syncworks" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
