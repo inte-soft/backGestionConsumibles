@@ -5,10 +5,10 @@ import com.intesoft.syncworks.service.UserService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -19,6 +19,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/messages")
+    public ResponseEntity<List<String>> messages(){
+        return ResponseEntity.ok(Arrays.asList("first","second"));
+    }
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createUser(@RequestBody CreateUserRequest request) {
         userService.createUser(request.getUsername(), request.getPassword(), request.getName(), request.getLastName());
@@ -68,4 +72,5 @@ public class UserController {
             this.lastName = lastName;
         }
     }
+
 }
