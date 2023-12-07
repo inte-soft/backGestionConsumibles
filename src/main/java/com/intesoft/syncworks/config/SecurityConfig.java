@@ -38,7 +38,6 @@ public class SecurityConfig  {
                                 .requestMatchers(HttpMethod.POST, "/users/**").hasAnyRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/users/**").hasAnyRole("ADMIN")
                                 .anyRequest().authenticated()
-
                 );
         return http.build();
     }
