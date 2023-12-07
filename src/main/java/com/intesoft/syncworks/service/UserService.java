@@ -5,6 +5,7 @@ import com.intesoft.syncworks.domain.repositories.UserRepository;
 
 import com.intesoft.syncworks.exceptions.AppException;
 import com.intesoft.syncworks.interfaces.dto.CredentialDto;
+import com.intesoft.syncworks.interfaces.dto.PasswordUpdateDto;
 import com.intesoft.syncworks.interfaces.dto.SignupDto;
 import com.intesoft.syncworks.interfaces.dto.UserDto;
 import com.intesoft.syncworks.mappers.UserMapper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.CharBuffer;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -36,23 +38,6 @@ public class UserService {
     }
 
 
-    @Transactional
-    public User createUser(String username, String password, String name, String lastName) {
-        // Encriptar la contraseña antes de almacenarla en la base de datos
-        String encryptedPassword = passwordEncoder.encode(password);
-
-        User user = new User();
-        user.setUserName(username);
-        user.setPassword(encryptedPassword);
-        user.setName(name);
-        user.setLastName(lastName);
-
-        // Guardar el usuario en la base de datos
-        userRepository.save(user);
-
-        return user;
-    }
-
     public UserDto register(SignupDto signupDto) {
         Optional<User> optionalUser = userRepository.findByUserName(signupDto.userName());
 
@@ -64,4 +49,42 @@ public class UserService {
         User savedUser = userRepository.save(user);
         return userMapper.toUserDto(savedUser);
     }
+
+    public UserDto update(Long id, SignupDto signupDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setName(signupDto.name());
+            user.setLastName(signupDto.lastName());
+            User savedUser = userRepository.save(user);
+            return userMapper.toUserDto(savedUser);
+        }else {
+            throw new AppException("User not found", HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
+    public List<UserDto> listAll() {
+        List<User> users = userRepository.findAll();
+        return userMapper.toUserDtoList(users);
+    }
+
+    public Long updatePassword(Long id, PasswordUpdateDto passwordUpdateDto) {
+        User user = userRepository.findById(id).orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
+        
+        boolean isMatch = passwordEncoder.matches(passwordUpdateDto.getOldPassword(), user.getPassword());
+        if (!isMatch) {
+            throw new AppException("Old password is incorrect", HttpStatus.BAD_REQUEST);
+        }
+        
+        String encryptedPassword = passwordEncoder.encode(passwordUpdateDto.getNewPassword());
+        user.setPassword(encryptedPassword);
+        
+        userRepository.save(user);
+        
+        return user.getId();
+    }
+
+
 }

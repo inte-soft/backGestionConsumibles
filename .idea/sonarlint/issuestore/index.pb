@@ -51,3 +51,7 @@ q
 Asrc/main/java/com/intesoft/syncworks/config/UserAuthProvider.java,f\f\ff034702466589b0a6922f30bf3386e3aa7dcfb8
 j
 :src/main/java/com/intesoft/syncworks/config/JpaConfig.java,a\b\ab34c36d89291cc294b50da242a471fb77527e56
+}
+Msrc/main/java/com/intesoft/syncworks/config/UserAuthenticationEntryPoint.java,e\0\e06f9551a1c0f917346ccffdf2a8a9f17c87c680
+z
+Jsrc/main/java/com/intesoft/syncworks/interfaces/dto/PasswordUpdateDto.java,0\0\0005c4d18a0ee473489bb84ac013aa222c640dcd

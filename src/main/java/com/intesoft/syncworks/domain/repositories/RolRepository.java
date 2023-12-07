@@ -1,2 +1,11 @@
-package com.intesoft.syncworks.domain.repositories;public interface RolRepository {
+package com.intesoft.syncworks.domain.repositories;
+
+import com.intesoft.syncworks.domain.entities.Rol;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface RolRepository extends JpaRepository<Rol, Long> {
+    Optional<Rol> findByName(String name);
+
 }
