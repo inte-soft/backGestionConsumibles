@@ -66,6 +66,7 @@ public class UserAuthProvider {
 
         List<SimpleGrantedAuthority> authorities = user.getRol().stream()
                 .map(Rol::getName)
+                .map(roleName -> "ROLE_" + roleName)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
@@ -86,6 +87,7 @@ public class UserAuthProvider {
 
         List<SimpleGrantedAuthority> authorities = user.getRol().stream()
                 .map(Rol::getName)
+                .map(roleName -> "ROLE_" + roleName)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 

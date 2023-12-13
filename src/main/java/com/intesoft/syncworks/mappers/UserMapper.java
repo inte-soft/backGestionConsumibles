@@ -6,6 +6,7 @@ import com.intesoft.syncworks.interfaces.dto.UserDto;
 
 import java.util.List;
 
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -23,5 +24,6 @@ public interface UserMapper {
     @Mapping(source = "userName", target = "userName")
     User signUpToUser(SignupDto signupDto);
 
+    @IterableMapping(elementTargetType = UserDto.class)
     List<UserDto> toUserDtoList(List<User> users);
 }
