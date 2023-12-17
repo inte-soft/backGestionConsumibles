@@ -35,6 +35,9 @@ public class SecurityConfig  {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) ->
                         requests.requestMatchers(HttpMethod.POST, "/login").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/callback").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/welcome").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/drive/**").hasAnyRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/users/**").hasAnyRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/users/**").hasAnyRole("ADMIN")
                                 .anyRequest().authenticated()

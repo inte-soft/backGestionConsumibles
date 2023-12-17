@@ -1,7 +1,7 @@
 package com.intesoft.syncworks.exceptions;
 
-import org.springframework.http.HttpStatus;
 
+import org.springframework.http.HttpStatus;
 public class AppException extends RuntimeException {
 
     private final HttpStatus httpStatus;
@@ -13,4 +13,6 @@ public class AppException extends RuntimeException {
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
+
+
 }

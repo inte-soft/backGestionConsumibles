@@ -5,19 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23c1421d-62ad-45bf-8214-cb5f2ed82a3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/DriveConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/UserRol.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/DriveService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/credentials.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/UploadRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/WelcomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/PdfCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/QrCodeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/demco.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/urlQR.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/UserAuthProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/UserAuthProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/DriveConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/DriveConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/exceptions/AppException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/exceptions/AppException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/DriveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/DriveService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/credentials.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/credentials.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +69,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.SyncworksApplication.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -72,12 +78,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/alejo/Downloads/syncworks/syncworks/target/classes/com/intesoft/syncworks/credentials",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/alejo/Downloads/syncworks/syncworks/src/main/resources/static/images",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.56855226",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+    "settings.editor.selected.configurable": "project.propDebugger"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -87,6 +94,8 @@
       <recent name="com.intesoft.syncworks.exceptions" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources\static\images" />
+      <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\target\classes\com\intesoft\syncworks\credentials" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\target\classes\com\intesoft\syncworks\config" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\credentials" />
@@ -138,6 +147,13 @@
         <item itemvalue="JUnit.All in syncworks" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-19.0.2-corretto-19.0.2-8336523bb0d9-b81783ad" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
