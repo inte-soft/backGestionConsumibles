@@ -121,4 +121,26 @@ public class DriveController {
         ErrorDto errorDto = new ErrorDto(ex.getMessage());
         return ResponseEntity.status(ex.getHttpStatus()).body(errorDto);
     }
+
+    //metodo para obtener el listado de carpetas que hay en drive con su id y nombre
+    @GetMapping("/folders")
+    public ResponseEntity<List<File>> listFolders()  {
+        List<File> folders = driveService.listFolders();
+        return ResponseEntity.ok().body(folders);
+    }
+
+    //metodo para listar archivos dentro de una carpeta
+    @GetMapping("/files/{folderId}")
+    public ResponseEntity<List<File>> listFilesInFolder(@PathVariable String folderId) throws IOException {
+        List<File> files = driveService.listFilesInFolder(folderId);
+        return ResponseEntity.ok().body(files);
+    }
+
+    //metodo para obtener enlace de un archivo en google drive
+    @GetMapping("/get-link/{fileId}")
+    public ResponseEntity<String> getFileLink(
+            @PathVariable String fileId) throws IOException {
+        String fileLink = driveService.getFileLink(fileId);
+        return ResponseEntity.ok().body(fileLink);
+    }
 }

@@ -29,7 +29,7 @@ public class DriveConfig {
     // codigo para configurar conexion con google drive
     private static final String APPLICATION_NAME = "QR-Code-Generator";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
+    private static final String TOKENS_DIRECTORY_PATH = "/tokens";
 
     private static final List SCOPES = Collections.singletonList(DriveScopes.DRIVE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json"; // path file Google Drive Service

@@ -102,4 +102,29 @@ public class DriveService {
     }
 
 
+    public List<File> listFolders() {
+        try {
+            return drive.files().list()
+                    .setQ("mimeType='application/vnd.google-apps.folder'")
+                    .setFields("files(id, name)")
+                    .execute()
+                    .getFiles();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<File> listFilesInFolder(String folderId) {
+        try {
+            return drive.files().list()
+                    .setQ("'" + folderId + "' in parents")
+                    .setFields("files(id, name)")
+                    .execute()
+                    .getFiles();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

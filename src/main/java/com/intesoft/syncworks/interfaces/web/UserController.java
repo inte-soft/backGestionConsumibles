@@ -1,26 +1,26 @@
 package com.intesoft.syncworks.interfaces.web;
 
-import com.intesoft.syncworks.interfaces.dto.PasswordUpdateDto;
-import com.intesoft.syncworks.interfaces.dto.ResponseDto;
-import com.intesoft.syncworks.interfaces.dto.SignupDto;
-import com.intesoft.syncworks.interfaces.dto.UserDto;
+import com.intesoft.syncworks.domain.entities.Rol;
+import com.intesoft.syncworks.interfaces.dto.*;
 import com.intesoft.syncworks.service.UserService;
+import com.intesoft.syncworks.service.RoleService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @PostMapping("/register")
@@ -36,6 +36,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+
     // create service to list all users
     @GetMapping("/list")
     public ResponseEntity<List<UserDto>> listAll() {
@@ -43,9 +44,36 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+
+
     @PutMapping("/{id}/password")
     public ResponseEntity<String> updatePassword(@PathVariable Long id, @RequestBody PasswordUpdateDto passwordUpdateDto) {
         Long userId = userService.updatePassword(id, passwordUpdateDto);
     return ResponseEntity.ok("Password updated successfully for user with ID: " + userId);
+    }
+
+    //create endpoint to delete users
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDto> delete(@PathVariable Long id) {
+        userService.delete(id);
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setInfo("User deleted successfully"
+                , 200, "OK");
+        return ResponseEntity.ok(responseDto);
+    }
+
+    //create endpoint to list roles
+    @GetMapping("/roles")
+    public ResponseEntity<List<RolDto>> listRoles() {
+        List<RolDto> roles = roleService.listAll();
+        return ResponseEntity.ok(roles);
+    }
+
+    @PutMapping("/{id}/roles")
+    public ResponseEntity<ResponseDto> updateRoles(@PathVariable Long id, @RequestBody SignupDto signupDto) {
+        UserDto userDto = userService.updateRol(id, signupDto);
+        ResponseDto responseDto =  new ResponseDto();
+        responseDto.setInfo("Roles updated successfully for user with ID: " + userDto.getId(),200,"OK");
+        return ResponseEntity.ok(responseDto);
     }
 }

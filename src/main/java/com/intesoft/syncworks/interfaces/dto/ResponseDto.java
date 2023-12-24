@@ -1,7 +1,12 @@
 package com.intesoft.syncworks.interfaces.dto;
 
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+
 
 public class ResponseDto {
     private int statusCode;

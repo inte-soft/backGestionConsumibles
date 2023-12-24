@@ -87,4 +87,20 @@ public class UserService {
     }
 
 
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public UserDto updateRol(Long id, SignupDto signupDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setRol(signupDto.rol());
+            User savedUser = userRepository.save(user);
+            return userMapper.toUserDto(savedUser);
+        }else {
+            throw new AppException("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

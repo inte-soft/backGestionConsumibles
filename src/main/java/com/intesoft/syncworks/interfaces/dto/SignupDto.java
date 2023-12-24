@@ -7,6 +7,6 @@ import com.intesoft.syncworks.domain.entities.Rol;
 
 import java.util.List;
 
-public record SignupDto (String name, String lastName, String userName, char [] password, List<Rol> rols, Area area) {
+public record SignupDto (String name, String lastName, String userName, char [] password, List<Rol> rol, Area area) {
 
 }
