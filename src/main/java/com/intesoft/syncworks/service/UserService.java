@@ -1,13 +1,13 @@
 package com.intesoft.syncworks.service;
 
+import com.intesoft.syncworks.domain.entities.Area;
 import com.intesoft.syncworks.domain.entities.User;
+import com.intesoft.syncworks.domain.repositories.AreaRepository;
 import com.intesoft.syncworks.domain.repositories.UserRepository;
 
 import com.intesoft.syncworks.exceptions.AppException;
-import com.intesoft.syncworks.interfaces.dto.CredentialDto;
-import com.intesoft.syncworks.interfaces.dto.PasswordUpdateDto;
-import com.intesoft.syncworks.interfaces.dto.SignupDto;
-import com.intesoft.syncworks.interfaces.dto.UserDto;
+import com.intesoft.syncworks.interfaces.dto.*;
+import com.intesoft.syncworks.mappers.AreaMapper;
 import com.intesoft.syncworks.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +25,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final AreaRepository areaRepository;
+    private final AreaMapper areaMapper;
+
 
 
     public UserDto login(CredentialDto credentialDto){
@@ -72,11 +75,7 @@ public class UserService {
 
     public Long updatePassword(Long id, PasswordUpdateDto passwordUpdateDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new AppException("User not found", HttpStatus.NOT_FOUND));
-        
-        boolean isMatch = passwordEncoder.matches(passwordUpdateDto.getOldPassword(), user.getPassword());
-        if (!isMatch) {
-            throw new AppException("Old password is incorrect", HttpStatus.BAD_REQUEST);
-        }
+
         
         String encryptedPassword = passwordEncoder.encode(passwordUpdateDto.getNewPassword());
         user.setPassword(encryptedPassword);
@@ -103,4 +102,22 @@ public class UserService {
         }
     }
 
+    public List<AreaDto> listAreas() {
+        List<Area> areas = areaRepository.findAll();
+        return areaMapper.toAreaDtoList(areas);
+    }
+
+    public UserDto updateUser(Long id, SignupDto signupDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setName(signupDto.name());
+            user.setLastName(signupDto.lastName());
+            user.setArea(signupDto.area());
+            User savedUser = userRepository.save(user);
+            return userMapper.toUserDto(savedUser);
+        }else {
+            throw new AppException("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
 }

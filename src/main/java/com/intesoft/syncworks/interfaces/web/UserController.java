@@ -47,18 +47,20 @@ public class UserController {
 
 
     @PutMapping("/{id}/password")
-    public ResponseEntity<String> updatePassword(@PathVariable Long id, @RequestBody PasswordUpdateDto passwordUpdateDto) {
+    public ResponseEntity<ResponseDto> updatePassword(@PathVariable Long id, @RequestBody PasswordUpdateDto passwordUpdateDto) {
         Long userId = userService.updatePassword(id, passwordUpdateDto);
-    return ResponseEntity.ok("Password updated successfully for user with ID: " + userId);
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setInfo("Password updated successfully for user with ID: " + userId,200,"message");
+        return ResponseEntity.ok(responseDto);
     }
 
     //create endpoint to delete users
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<ResponseDto> delete(@PathVariable Long id) {
         userService.delete(id);
         ResponseDto responseDto = new ResponseDto();
         responseDto.setInfo("User deleted successfully"
-                , 200, "OK");
+                , 200, "message");
         return ResponseEntity.ok(responseDto);
     }
 
@@ -74,6 +76,20 @@ public class UserController {
         UserDto userDto = userService.updateRol(id, signupDto);
         ResponseDto responseDto =  new ResponseDto();
         responseDto.setInfo("Roles updated successfully for user with ID: " + userDto.getId(),200,"OK");
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/arealist")
+    public ResponseEntity<List<AreaDto>> listAreas() {
+        List<AreaDto> areas = userService.listAreas();
+        return ResponseEntity.ok(areas);
+    }
+
+    @PutMapping("/{id}/update")
+    public ResponseEntity<ResponseDto> updateUser(@PathVariable Long id, @RequestBody SignupDto signupDto) {
+        UserDto userDto = userService.updateUser(id, signupDto);
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setInfo("User updated successfully for user with ID: " + userDto.getId(),200,"message");
         return ResponseEntity.ok(responseDto);
     }
 }

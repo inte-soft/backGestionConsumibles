@@ -1,5 +1,6 @@
 package com.intesoft.syncworks.interfaces.dto;
 
+import com.intesoft.syncworks.domain.entities.Area;
 import com.intesoft.syncworks.domain.entities.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,17 +19,19 @@ public class UserDto {
     private String lastName;
     private String token;
     private List<Rol> rol;
+    private Area area;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String userName, String name, String lastName, String token, List<Rol> rol) {
+    public UserDto(Long id, String userName, String name, String lastName, String token, List<Rol> rol, Area area) {
         this.id = id;
         this.userName = userName;
         this.name = name;
         this.lastName = lastName;
         this.token = token;
         this.rol= rol;
+        this.area = area;
     }
 
     public Long getId() {
@@ -77,6 +80,14 @@ public class UserDto {
 
     public void setRoles(List<Rol> rol) {
         this.rol = rol;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
     }
 
 }
