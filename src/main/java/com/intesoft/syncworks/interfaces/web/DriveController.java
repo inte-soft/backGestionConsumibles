@@ -1,12 +1,9 @@
 package com.intesoft.syncworks.interfaces.web;
 
-import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 import com.google.zxing.WriterException;
-import com.intesoft.syncworks.config.DriveConfig;
 import com.intesoft.syncworks.exceptions.AppException;
-import com.intesoft.syncworks.interfaces.dto.ErrorDto;
-import com.intesoft.syncworks.interfaces.dto.UploadRequestDto;
+import com.intesoft.syncworks.interfaces.dto.*;
 import com.intesoft.syncworks.service.DriveService;
 import com.intesoft.syncworks.service.PdfCreator;
 import com.intesoft.syncworks.service.QrCodeService;
@@ -19,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,52 +55,54 @@ public class DriveController {
     }
 
     @PostMapping("/upload-ot")
-    public ResponseEntity<?> uploadOt( @RequestParam("files") MultipartFile[] files,
-                                                @RequestParam("folderName")String folderName,
-                                                @RequestParam("fileNames")List<String> fileNames)  {
+    public ResponseEntity<?> uploadOt(@RequestParam("ot") String ot,
+                                      @RequestParam("name") String nombre,
+                                      @RequestParam("names") List<String> nombres,
+                                      @RequestParam("files") MultipartFile[] files) {
         try {
-            UploadRequestDto uploadRequestDto = new UploadRequestDto();
-            uploadRequestDto.setFileNames(fileNames);
-            uploadRequestDto.setFolderName(folderName);
+            // Crea la carpeta en Google Drive con el nombre recibido
+
+            MultipartFile[] archivos = files;
+
+            File folder = driveService.createFolder((ot + " "+ nombre).toString());
+            System.out.println("se creo carpeta");
+
+            List<String[]> filesInformation = new ArrayList<>();
+            List<String> fileLinks = new ArrayList<>();
+            for (int i = 0; i < archivos.length; i++) {
+                MultipartFile file = archivos[i];
+                String fileName = nombres.get(i);
+                filesInformation.add(driveService.uploadFileToDrive(file, fileName, folder.getId()));
+                System.out.println("se subio archivo");
+                fileLinks.add(driveService.getFileLink(filesInformation.get(i)[0]));
+                System.out.println("se obtuvo link");
+            }
+
+
+            MultipartFile pdf = pdfCreator.createPdf(folder.getName(), nombres, fileLinks);
+                   filesInformation.add(driveService.uploadFileToDrive(pdf, folder.getName()+".pdf", folder.getId()));
+                   System.out.println("se subio pdf");
+
             byte[] qr = new byte[0];
-            if (uploadRequestDto.getFileNames().size() != files.length) {
-                return ResponseEntity.status(400).body(null); // Bad Request
-            }
+                    qr = qrCodeService.generateQrCodeWithLogo(filesInformation.get(filesInformation.size()-1)[2]);
 
-            File folder = driveService.createFolder(uploadRequestDto.getFolderName());
-            List<String[]> filesinformation = new ArrayList<>();
-            for (int i = 0; i < files.length+1; i++) {
+                    System.out.println("se creo qr");
 
-                if (i == files.length) {
-                    List<String> fileLinks = new ArrayList<>();
-                    List<String> fileNamesList = new ArrayList<>();
-                   for (int j = 0; j < filesinformation.size(); j++) {
-                       String[] fileInformation = filesinformation.get(j);
-                          fileLinks.add(fileInformation[2]);
-                          fileNamesList.add(fileInformation[1]);
-
-                   }
-                   MultipartFile pdf = pdfCreator.createPdf(folder.getName(), fileNamesList, fileLinks);
-                   filesinformation.add(driveService.uploadFileToDrive(pdf, folder.getName()+".pdf", folder.getId()));
-                    qr = qrCodeService.generateQrCodeWithLogo(filesinformation.get(filesinformation.size()-1)[2]);
-                }else {
-                    MultipartFile file = files[i];
-                    String fileName = uploadRequestDto.getFileNames().get(i);
-                    // Here you should write the file to a local temporary file, then upload it to Drive
-                    // For the sake of simplicity, we'll assume you have a method for this: uploadFileToDrive
-                    filesinformation.add(driveService.uploadFileToDrive(file, fileName, folder.getId()));
-                }
-            }
-            /*String qrBase64 = "data:image/png;base64," + Base64.getEncoder().encodeToString(qr);
-
+            String qrBase64 = "data:image/png;base64," + Base64.getEncoder().encodeToString(qr);
+            System.out.println("se convirtio qr a base64");
+            //transformar qr en base64 a multipartfile
+            MultipartFile qrMultipart = qrCodeService.convertBase64ToMultipart(qrBase64);
+            System.out.println("se convirtio qr a multipart");
+            driveService.uploadFileToDrive(qrMultipart, "qr", folder.getId() );
+            System.out.println("se subio qr a drive");
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
 
 
-            return ResponseEntity.ok().headers(headers).body(qrBase64);*/
+            return ResponseEntity.ok().headers(headers).body(qrBase64);
 
-            Files.write(Paths.get("qrCode.png"), qr);
-            return ResponseEntity.ok().body(new FileSystemResource("qrCode.png"));
+            /*Files.write(Paths.get("qrCode.png"), qr);
+            return ResponseEntity.ok().body(new FileSystemResource("qrCode.png"));*/
 
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -122,12 +120,19 @@ public class DriveController {
         return ResponseEntity.status(ex.getHttpStatus()).body(errorDto);
     }
 
-    //metodo para obtener el listado de carpetas que hay en drive con su id y nombre
-    @GetMapping("/folders")
+    //metodo para obtener el listado de carpetas que hay en drive con su id y nombre con limite de registros a entregar
+    @GetMapping("/folders{limit}")
+    public ResponseEntity<List<Folder>> listFolders(@PathVariable Integer limit) throws IOException {
+        List<Folder> folders = driveService.listFolders(limit);
+        return ResponseEntity.ok().body(folders);
+    }
+
+
+    /*@GetMapping("/folders")
     public ResponseEntity<List<File>> listFolders()  {
         List<File> folders = driveService.listFolders();
         return ResponseEntity.ok().body(folders);
-    }
+    }*/
 
     //metodo para listar archivos dentro de una carpeta
     @GetMapping("/files/{folderId}")
@@ -142,5 +147,51 @@ public class DriveController {
             @PathVariable String fileId) throws IOException {
         String fileLink = driveService.getFileLink(fileId);
         return ResponseEntity.ok().body(fileLink);
+    }
+
+    //metodo para subir un unico archivo archivo a una carpeta en google drive y modificar el pdf de la carpeta con el nuevo archivo
+    @PostMapping("/upload-file")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file,
+                                        @RequestParam("name") String fileName,
+                                        @RequestParam("folderId") String folderId) {
+        try {
+            // Sube el archivo a Google Drive
+            String[] fileInformation = driveService.uploadFileToDrive(file, fileName, folderId);
+            List<File> filesInFolder = driveService.listFilesInFolder(folderId);
+            List<String> fileNames = new ArrayList<>();
+            List<String> fileLinks = new ArrayList<>();
+            for (File fileInFolder : filesInFolder) {
+               // obtener el nombre y el links de cada archivo en la lista
+                fileNames.add(fileInFolder.getName());
+                fileLinks.add(driveService.getFileLink(fileInFolder.getId()));
+            }
+
+            MultipartFile pdf = pdfCreator.createPdf(driveService.getFolderName(folderId), fileNames, fileLinks);
+            driveService.updateFile(driveService.searchFilePP(folderId), pdf);
+
+            return ResponseEntity.ok().body(driveService.listFilesInFolder(folderId));
+
+
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorDto("Error al procesar la solicitud: " + e.getMessage()));
+        }
+    }
+
+
+    @GetMapping("/download-qr{folderId}")
+    public ResponseEntity<?> downloadQr(@PathVariable String folderId) throws IOException {
+        byte[] qr = driveService.downloadQr(folderId);
+        String qrBase64 = "data:image/png;base64," + Base64.getEncoder().encodeToString(qr);
+        return ResponseEntity.ok().body(qrBase64);
+    }
+
+    //metodo para borrar una carpeta con sus archivos en google drive
+    @DeleteMapping("/delete-folder/{folderId}")
+    public ResponseEntity<ResponseDto> deleteFolder(@PathVariable String folderId) throws IOException {
+        driveService.deleteFolder(folderId);
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setInfo("Carpeta eliminada", 200, "message");
+        return ResponseEntity.ok().body(responseDto);
     }
 }

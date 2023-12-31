@@ -6,22 +6,23 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.Base64;
 
 @Service
 public class QrCodeService {
-    private static final String LOGO_PATH = "src/main/resources/static/images/demco.png";
+    private static final String LOGO_PATH = "static/images/demco.png";
 
     public byte[] generateQrCodeWithLogo(String qrContent) throws IOException, WriterException {
         int qrCodeSize = 500;
+
 
         // Generar el código QR
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -43,10 +44,10 @@ public class QrCodeService {
                 }
             }
         }
+        System.out.println("antes de buscar la imagen");
         String logoPath = LOGO_PATH;
         // Agregar el logo en el centro
         addLogo(qrImage, logoPath);
-
         // Convertir la imagen a bytes
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(qrImage, "png", baos);
@@ -54,11 +55,16 @@ public class QrCodeService {
         return baos.toByteArray();
     }
 
+
+
     private void addLogo(BufferedImage qrImage, String logoPath) throws IOException {
         Graphics2D graphics = qrImage.createGraphics();
         int logoSize = 50;
 
-        BufferedImage logo = ImageIO.read(new File(logoPath));
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        InputStream logoStream = classLoader.getResourceAsStream(logoPath);
+        BufferedImage logo = ImageIO.read(logoStream);
+
         AffineTransform transform = new AffineTransform();
         transform.scale((double) logoSize / logo.getWidth(), (double) logoSize / logo.getHeight());
         AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
@@ -69,5 +75,52 @@ public class QrCodeService {
 
         graphics.drawImage(logo, x, y, null);
         graphics.dispose();
+    }
+
+    public MultipartFile convertBase64ToMultipart(String qrBase64) {
+        String[] strings = qrBase64.split(",");
+        byte[] qrBytes = Base64.getDecoder().decode(strings[1]);
+
+        return new MultipartFile() {
+            @Override
+            public String getName() {
+                return "qr";
+            }
+
+            @Override
+            public String getOriginalFilename() {
+                return "qr.png";
+            }
+
+            @Override
+            public String getContentType() {
+                return "image/png";
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public long getSize() {
+                return qrBytes.length;
+            }
+
+            @Override
+            public byte[] getBytes() throws IOException {
+                return qrBytes;
+            }
+
+            @Override
+            public InputStream getInputStream() throws IOException {
+                return new ByteArrayInputStream(qrBytes);
+            }
+
+            @Override
+            public void transferTo(java.io.File file) throws IOException, IllegalStateException {
+                new FileOutputStream(file).write(qrBytes);
+            }
+        };
     }
 }

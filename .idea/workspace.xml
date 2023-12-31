@@ -5,15 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23c1421d-62ad-45bf-8214-cb5f2ed82a3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/repositories/AreaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/AreaDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/AreaMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/Folder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/NewOtDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/PasswordUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/PasswordUpdateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qrCode.png" beforeDir="false" afterPath="$PROJECT_DIR$/qrCode.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/RolMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/RolMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/DriveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/DriveService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/QrCodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/QrCodeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -62,6 +65,7 @@
   "keyToString": {
     "Application.SyncworksApplication.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
+    "Maven.syncworks [clean].executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -178,19 +182,11 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/UserController.java</url>
-          <line>49</line>
-          <properties class="com.intesoft.syncworks.interfaces.web.UserController" method="updatePassword">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.intesoft.syncworks.service.DriveService" memberName="drive" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
