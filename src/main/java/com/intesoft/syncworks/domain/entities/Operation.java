@@ -1,7 +1,14 @@
 package com.intesoft.syncworks.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Builder
 @Entity
 public class Operation {
     @Id

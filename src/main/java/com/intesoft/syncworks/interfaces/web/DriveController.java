@@ -194,4 +194,12 @@ public class DriveController {
         responseDto.setInfo("Carpeta eliminada", 200, "message");
         return ResponseEntity.ok().body(responseDto);
     }
+
+    @DeleteMapping("/delete-file/{fileId}")
+    public ResponseEntity<ResponseDto> deleteFile(@PathVariable String fileId) throws IOException {
+        driveService.deleteFile(fileId);
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setInfo("Archivo eliminado", 200, "message");
+        return ResponseEntity.ok().body(responseDto);
+    }
 }

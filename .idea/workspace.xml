@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23c1421d-62ad-45bf-8214-cb5f2ed82a3a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/demco.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/demco.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/lombok.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/bureaoBeritas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/demcoLetras.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/hechoColombia.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/Rol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/RolOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/RolOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/UserRol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/domain/entities/UserRol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/mappers/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/PdfCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/service/PdfCreator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +84,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.56855226",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -78,18 +94,18 @@
       <recent name="com.intesoft.syncworks.exceptions" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources\static\images" />
+      <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\target\classes\com\intesoft\syncworks\credentials" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\target\classes\com\intesoft\syncworks\config" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\credentials" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources\static\" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\resources" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\config" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\target\classes\com\intesoft\syncworks\credentials" />
       <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\credentials" />
-      <recent name="C:\Users\alejo\Downloads\syncworks\syncworks\src\main\java\com\intesoft\syncworks\domain\" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -171,9 +187,24 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/AuthController.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/intesoft/syncworks/interfaces/web/DriveController.java</url>
+          <line>158</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.intesoft.syncworks.service.DriveService" memberName="drive" />
+        <PinnedItemInfo parentTag="java.io.BufferedInputStream" memberName="buf" />
       </pinned-members>
     </pin-to-top-manager>
   </component>

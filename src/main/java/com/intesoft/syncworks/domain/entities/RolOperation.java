@@ -1,7 +1,15 @@
 package com.intesoft.syncworks.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Data
+@Builder
 @Entity(name = "rolOperation")
 public class RolOperation {
     @Id
