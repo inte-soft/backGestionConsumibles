@@ -24,94 +24,98 @@ import java.util.List;
 public class PdfCreator {
 
     public MultipartFile createPdf(String folderName, List<String> fileNames, List<String> fileLinks) {
-        //fileNames.add("");
-        //fileLinks.add("");
-        try (PDDocument document = new PDDocument();
-             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+        try (
+                InputStream templateStream = getClass().getClassLoader().getResourceAsStream("plantillas/plantilla.pdf");
+                PDDocument document = PDDocument.load(templateStream);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()
+        ) {
+            PDPage page = document.getPage(0);
 
-            PDPage page = new PDPage();
-            document.addPage(page);
-
-            addHeaderImages(document, page);
-
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
-
+            try (
+                    PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)
+            ) {
                 contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
-                float yPosition = 600;  // Posición Y inicial
+                float yPosition = 600;
+                float margin = 20;
+                float width = page.getMediaBox().getWidth() - 2 * margin;
 
-                contentStream.beginText();
-                contentStream.newLineAtOffset(20, yPosition);
-                String text = "DEMCO INGENIERÍA, es una empresa dinámica dedicada al diseño, construcción y puesta en servicio de subestaciones y tableros\n" +
-                        " eléctricos en media y baja tensión, desarrollando proyectos con altas especificaciones en ingeniería, en alianza con reconocidas\n" +
-                        "empresas del sector eléctrico.\n" +
-                        "Entregamos a nuestros clientes soluciones completas e integrales respaldados por procesos de ingeniería y automatización, ágiles y\n" +
-                        "con importantes alianzas con reconocidas empresas del sector.\n" +
-                        "Somos una empresa Colombiana con proyección hacia el futuro, contamos con productos de calidad, precios competitivos, recurso humano\n" +
-                        "calificado, capacidad operativa y respuesta oportuna a nuestros cliente.";
+                String text =
+                        "DEMCO INGENIERÍA, es una empresa dinámica dedicada al diseño,  construcción  y  puesta en servicio de subestaciones y tableros\n" +
+                        "eléctricos  en  media  y  baja  tensión,  desarrollando  proyectos  con  altas  especificaciones  en ingeniería, en alianza con reconocidas\n" +
+                        "empresas  del  sector  eléctrico. Entregamos  a  nuestros   clientes   soluciones   completas   e  integrales  respaldados por  procesos  de\n" +
+                        "ingeniería  y  automatización, ágiles y  con importantes alianzas con reconocidas empresas del sector.Somos una empresa Colombiana\n" +
+                        "con proyección  hacia el  futuro, contamos  con  productos  de  calidad,  precios  competitivos,  recurso  humano  calificado, capacidad\n" +
+                        "operativa y respuesta oportuna a nuestros cliente.                                                                                                                                            \n";
 
                 String[] lines = text.split("\n");
 
-
                 for (String line : lines) {
+                    float stringWidth = PDType1Font.TIMES_BOLD.getStringWidth(line) / 1000 * 10;
+                    float xOffset = margin + (width - stringWidth) / 2;
+
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(xOffset, yPosition);
                     contentStream.showText(line);
-                    contentStream.newLineAtOffset(0, -15);
+                    contentStream.endText();
                     yPosition -= 15;
                 }
-                contentStream.newLineAtOffset(0, -30);
-                yPosition -= 30;
-                contentStream.setFont(PDType1Font.COURIER_OBLIQUE, 14);
-                contentStream.showText("Proyecto: " + folderName);
-                contentStream.newLineAtOffset(0, -20);
 
+                // Restaurar el espacio adicional después del bloque de texto
+                yPosition -= 30;
+
+                // Comenzar nuevo bloque de texto para "Proyecto: "
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.COURIER_OBLIQUE, 14);
+                contentStream.newLineAtOffset(margin, yPosition);
+                contentStream.showText("Proyecto: " + folderName);
+                contentStream.endText();
+                yPosition -= 20;
 
                 for (int i = 0; i < fileNames.size(); i++) {
                     String fileName = fileNames.get(i);
                     String fileLink = fileLinks.get(i);
+
                     PDColor blackColor = new PDColor(new float[]{0, 0, 0}, PDDeviceRGB.INSTANCE);
                     contentStream.setNonStrokingColor(blackColor);
+
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(margin, yPosition);
                     contentStream.showText("Archivo: " + fileName);
-                    contentStream.newLineAtOffset(0, -15);
-                    // Establece el color del texto del enlace a azul
+                    contentStream.endText();
+                    yPosition -= 15;
+
                     PDColor blueColor = new PDColor(new float[]{0, 0, 1}, PDDeviceRGB.INSTANCE);
                     contentStream.setNonStrokingColor(blueColor);
 
-                    // Muestra el texto del enlace en azul
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(margin, yPosition);
                     contentStream.showText(fileLink);
-                    contentStream.newLineAtOffset(0, -15);
+                    contentStream.endText();
+                    yPosition -= 15;
 
-                    // Crea un hipervínculo para la URL del archivo
                     PDAnnotationLink link = new PDAnnotationLink();
                     PDActionURI actionURI = new PDActionURI();
                     actionURI.setURI(fileLink);
                     link.setAction(actionURI);
 
-                    yPosition -= 15;
-
-                    // Establece el rectángulo del enlace (ancho completo y posición ajustada)
                     PDRectangle position = new PDRectangle();
-                    position.setLowerLeftX(20);
-                    position.setLowerLeftY(yPosition - 30); // Ajusta según la fuente y el tamaño
-                    position.setUpperRightX(page.getMediaBox().getWidth()); // Ancho completo
-                    position.setUpperRightY(yPosition); // Ajusta según la fuente y el tamaño
+                    position.setLowerLeftX(margin);
+                    position.setLowerLeftY(yPosition);
+                    position.setUpperRightX(page.getMediaBox().getWidth() - margin);
+                    position.setUpperRightY(yPosition + 30);
                     link.setRectangle(position);
 
                     page.getAnnotations().add(link);
 
-
-
                     yPosition -= 15;
                 }
-
-                contentStream.endText();
             }
 
             document.save(byteArrayOutputStream);
             document.close();
 
-            // Convierte el ByteArrayOutputStream a un InputStream para crear un MultipartFile
             InputStream inputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
 
-            // Implementación simple de MultipartFile
             return ByteArrayMultipartFile(inputStream, "output.pdf");
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,68 +124,69 @@ public class PdfCreator {
     }
 
 
-   public MultipartFile ByteArrayMultipartFile(InputStream inputStream, String name) {
-       return new MultipartFile() {
-           @Override
-           public String getName() {
-               return name;
-           }
 
-           @Override
-           public String getOriginalFilename() {
-               return name;
-           }
+    public MultipartFile ByteArrayMultipartFile(InputStream inputStream, String name) {
+        return new MultipartFile() {
+            @Override
+            public String getName() {
+                return name;
+            }
 
-           @Override
-           public String getContentType() {
-               return "application/pdf";
-           }
+            @Override
+            public String getOriginalFilename() {
+                return name;
+            }
 
-           @Override
-           public boolean isEmpty() {
-               return false;
-           }
+            @Override
+            public String getContentType() {
+                return "application/pdf";
+            }
 
-           @Override
-           public long getSize() {
-               try {
-                   return inputStream.available();
-               } catch (IOException e) {
-                   e.printStackTrace();
-                   return 0;
-               }
-           }
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
 
-           @Override
-           public byte[] getBytes() throws IOException {
-               return inputStream.readAllBytes();
-           }
+            @Override
+            public long getSize() {
+                try {
+                    return inputStream.available();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return 0;
+                }
+            }
 
-           @Override
-           public InputStream getInputStream() throws IOException {
-               return inputStream;
-           }
+            @Override
+            public byte[] getBytes() throws IOException {
+                return inputStream.readAllBytes();
+            }
 
-           @Override
-           public void transferTo(java.io.File file) throws IOException, IllegalStateException {
-               // No es necesario implementar este método
-           }
-       };
-   }
+            @Override
+            public InputStream getInputStream() throws IOException {
+                return inputStream;
+            }
+
+            @Override
+            public void transferTo(java.io.File file) throws IOException, IllegalStateException {
+                // No es necesario implementar este método
+            }
+        };
+    }
+
     private void addHeaderImages(PDDocument document, PDPage page) {
         try {
-            // Configura las posiciones y tamaños de las imágenes según tus necesidades
-            float image1Width = 150;  // ajusta según el tamaño deseado para la imagen 1
-            float image1Height =75;  // ajusta según el tamaño deseado para la imagen 1
-            float image1Margin = 40;  // ajusta según el margen deseado para la imagen 1
+            float image1Width = 150;
+            float image1Height = 75;
+            float image1Margin = 40;
 
-            float image2Width = 100;  // ajusta según el tamaño deseado para la imagen 2
-            float image2Height = 50;  // ajusta según el tamaño deseado para la imagen 2
-            float image2Margin = 40;  // ajusta según el margen deseado para la imagen 2
+            float image2Width = 100;
+            float image2Height = 50;
+            float image2Margin = 40;
 
-            float image3Width = 100;  // ajusta según el tamaño deseado para la imagen 3
-            float image3Height = 50;  // ajusta según el tamaño deseado para la imagen 3
-            float image3Margin = 40;  // ajusta según el margen deseado para la imagen 3
+            float image3Width = 100;
+            float image3Height = 50;
+            float image3Margin = 40;
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, true)) {
                 // Carga las imágenes desde el classpath
@@ -199,7 +204,6 @@ public class PdfCreator {
                 contentStream.drawImage(image3, image3Margin + image2Margin + image1Width + image2Width, page.getMediaBox().getHeight() - image3Margin - image3Height, image3Width, image3Height);
             }
         } catch (IOException e) {
-            // Manejar la excepción de manera adecuada
             e.printStackTrace();
         }
     }

@@ -35,6 +35,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "id"))
     private List<Rol> rol = new ArrayList<>();
 
+    @Column(name = "email")
+    private String email;
+
 
 
 }

@@ -111,7 +111,8 @@ public class DriveService {
 
             List<File> files = drive.files().list()
                     .setQ("mimeType='application/vnd.google-apps.folder'")
-                    .setFields("files(id, name)")
+                    .setFields("files(id, name, createdTime)")
+                    .setOrderBy("createdTime desc")
                     .setPageSize(limit)
                     .execute()
                     .getFiles();
@@ -129,19 +130,6 @@ public class DriveService {
             return null;
         }
     }
-
-    /*public List<File> listFolders() {
-        try {
-            return drive.files().list()
-                    .setQ("mimeType='application/vnd.google-apps.folder'")
-                    .setFields("files(id, name)")
-                    .execute()
-                    .getFiles();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }*/
 
     public List<File> listFilesInFolder(String folderId) {
         try {
@@ -251,4 +239,26 @@ public class DriveService {
             e.printStackTrace();
         }
     }
+
+    public List<Folder> searchFolders(String folderName) {
+    try {
+        List<Folder> folders = new ArrayList<>();
+        List<File> files = drive.files().list()
+                .setQ("mimeType='application/vnd.google-apps.folder' and name contains '" + folderName + "'")
+                .setFields("files(id, name)")
+                .execute()
+                .getFiles();
+        for (File file : files) {
+            Folder folder = new Folder();
+            folder.setId(file.getId());
+            folder.setOt(file.getName().substring(0, 5));
+            folder.setName(file.getName());
+            folders.add(folder);
+        }
+        return folders;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 }

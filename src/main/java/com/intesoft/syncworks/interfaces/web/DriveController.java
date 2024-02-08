@@ -128,11 +128,11 @@ public class DriveController {
     }
 
 
-    /*@GetMapping("/folders")
-    public ResponseEntity<List<File>> listFolders()  {
-        List<File> folders = driveService.listFolders();
+    @GetMapping("/folder/search/{folderName}")
+    public ResponseEntity<List<Folder>> searchFolder(@PathVariable String folderName) throws IOException {
+       List<Folder> folders = driveService.searchFolders(folderName);
         return ResponseEntity.ok().body(folders);
-    }*/
+    }
 
     //metodo para listar archivos dentro de una carpeta
     @GetMapping("/files/{folderId}")

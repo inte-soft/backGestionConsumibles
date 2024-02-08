@@ -14,8 +14,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.nio.CharBuffer;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -114,9 +122,63 @@ public class UserService {
             user.setName(signupDto.name());
             user.setLastName(signupDto.lastName());
             user.setArea(signupDto.area());
+            user.setEmail(signupDto.email());
             User savedUser = userRepository.save(user);
             return userMapper.toUserDto(savedUser);
         }else {
+            throw new AppException("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public String getPhoto(Long id) {
+    Optional<User> optionalUser = userRepository.findById(id);
+    if (optionalUser.isPresent()) {
+        User user = optionalUser.get();
+        String imagePath = "C:\\Users\\alejo\\Downloads\\user_image\\" + user.getId() + ".png"; // Reemplaza esto con la ruta real a tus imágenes
+
+        try {
+            File file = new File(imagePath);
+            if (!file.exists()) {
+                imagePath = "C:\\Users\\alejo\\Downloads\\user_image\\0.png"; // Reemplaza esto con la ruta real a tu imagen por defecto
+                file = new File(imagePath);
+            }
+            BufferedImage img = ImageIO.read(file);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(img, "png", baos);
+            byte[] imageInByte = baos.toByteArray();
+            return Base64.getEncoder().encodeToString(imageInByte);
+        } catch (IOException e) {
+            throw new AppException("Error reading image file", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    } else {
+        throw new AppException("User not found", HttpStatus.NOT_FOUND);
+    }
+}
+
+    public String updatePhoto(Long id, MultipartFile imageFile) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            String imagePath = "C:\\Users\\alejo\\Downloads\\user_image\\" + user.getId() + ".png"; // Reemplaza esto con la ruta real a tus imágenes
+
+            try {
+                File file = new File(imagePath);
+                imageFile.transferTo(file);
+                return "Image updated successfully";
+            } catch (IOException e) {
+                throw new AppException("Error writing image file", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            throw new AppException("User not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public UserDto getUser(Long idUser) {
+        Optional<User> optionalUser = userRepository.findById(idUser);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return userMapper.toUserDto(user);
+        } else {
             throw new AppException("User not found", HttpStatus.NOT_FOUND);
         }
     }
