@@ -33,7 +33,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -53,6 +53,7 @@
     &quot;Application.SyncworksApplication.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
     &quot;Maven.syncworks [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.syncworks [install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.syncworks [validate].executor&quot;: &quot;Run&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
@@ -95,10 +96,10 @@
     <option name="myCommands">
       <command value="mvn compile" />
       <command value="mvn install:install" />
-      <command value="mvn install" />
       <command value="mvn deploy" />
-      <command value="mvn clean" />
       <command value="mvn validate" />
+      <command value="mvn clean" />
+      <command value="mvn install" />
     </option>
   </component>
   <component name="RunManager" selected="Application.SyncworksApplication">

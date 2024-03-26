@@ -40,12 +40,9 @@ public class PdfCreator {
                 float width = page.getMediaBox().getWidth() - 2 * margin;
 
                 String text =
-                        "DEMCO INGENIERÍA, es una empresa dinámica dedicada al diseño,  construcción  y  puesta en servicio de subestaciones y tableros\n" +
-                        "eléctricos  en  media  y  baja  tensión,  desarrollando  proyectos  con  altas  especificaciones  en ingeniería, en alianza con reconocidas\n" +
-                        "empresas  del  sector  eléctrico. Entregamos  a  nuestros   clientes   soluciones   completas   e  integrales  respaldados por  procesos  de\n" +
-                        "ingeniería  y  automatización, ágiles y  con importantes alianzas con reconocidas empresas del sector.Somos una empresa Colombiana\n" +
-                        "con proyección  hacia el  futuro, contamos  con  productos  de  calidad,  precios  competitivos,  recurso  humano  calificado, capacidad\n" +
-                        "operativa y respuesta oportuna a nuestros cliente.                                                                                                                                            \n";
+                        " \n" +
+                        " \n" +
+                        " \n";
 
                 String[] lines = text.split("\n");
 
